@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Itunes</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="shortcut icon"
+      href="https://img.icons8.com/color/96/itunes.svg"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+          <img
+            src="https://img.icons8.com/color/192/itunes.svg"
+            alt="Logo"
+            width="40"
+            height="32"
+            class="d-inline-block align-text-top"
+          />
+          Itunes
+        </a>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="container_fluid mb-5">
+        <h5 class="mb-4 mt-4">Welcome to music wizard ultra 2000</h5>
+
+        <form class="row g-3" novalidate action="/" method="POST">
+          <div class="col-auto">
+            <label for="band_search" class="">Search for Band</label>
+          </div>
+          <div class="col-auto">
+            <input
+              type="search"
+              class="form-control"
+              name="band"
+              id="band_search"
+              placeholder="Band Name"
+            />
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Search</button>
+          </div>
+        </form>
+
+        <table class="table table-hover">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">Band Name</th>
+              <th scope="col">Song Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% bands.forEach(function(band){ %>
+            <tr>
+              <td><%= band.artistName %></td>
+              <td><%= band.trackName %></td>
+              <td class="d-flex gap-2" style="width: fit-content">
+                <button
+                  type="submit"
+                  class="btn btn-sm btn-outline-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#track_details_<%= band.trackId %>"
+                >
+                  View
+                </button>
+              </td>
+              <div
+                class="modal fade"
+                id="track_details_<%= band.trackId %>"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        Details
+                      </h1>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="mb-3">
+                        <div
+                          class="container d-flex justify-content-center my-4 mb-5"
+                        >
+                          <div id="mobile-box">
+                            <div class="card">
+                              <div
+                                class="bg-image hover-overlay ripple"
+                                data-mdb-ripple-color="light"
+                              >
+                                <img
+                                  class="card-img-top"
+                                  src="<%= band.artworkUrl100 %>"
+                                  alt="Card image cap"
+                                />
+                              </div>
+                              <div class="card-body text-center">
+                                <h5 class="h5 font-weight-bold">
+                                  <a
+                                    href="<%= band.artistViewUrl %>"
+                                    target="_blank"
+                                    ><%= band.artistName %></a
+                                  >
+                                </h5>
+                                <p class="mb-0"><%= band.trackName %></p>
+                                <video
+                                  controls
+                                  id="music"
+                                  src="<%= band.previewUrl %>"
+                                  style="height: 60%; width: 100%"
+                                >
+                                  <source src="<%= band.previewUrl %>" />
+                                  Your browser does not support the video
+                                  element.
+                                </video>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+      integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
